@@ -2,7 +2,8 @@
 
 The **Physical Token** aim to partner with gaming industry and intellectual property (IP) owner to issue gaming NFT (e.g. Skin) along with limited supply physical merchandise (e.g. Limited Edition Game Card, Toy Figure). The firm "embed" NFT on physcial merchandise using patented anti-counterfiet 2D bar code:
 
-![Anti-Counterfeit Code Sample](img/Anti-Counterfeit Code Sample.png)
+
+![Anti-Counterfeit Code Sample](https://github.com/EvanLee2048/PhysicalToken/blob/master/img/Anti-Counterfeit%20Code%20Sample.png?raw=true)
 
 The **Physical Token** smart contract is an implementation of the ERC1155 which represent the limited supply of NFT along with the physical merchandise. It enhances the ERC1155 functionality to establish decentralized P-to-P trading eco-system. The eco-system benefits the stakeholders in the entire industries.
 
@@ -20,7 +21,7 @@ The **Physical Token** is designed to provide incentive of use to the stakeholde
 
 The flow diagram illustrates a end-to-end trading process in **Physical Token**:
 
-![Physical Token](img/Physical Token.png)
+![Physical Token](https://github.com/EvanLee2048/PhysicalToken/blob/master/img/Physical%20Token.png?raw=true)
 
 Here is a high-level description of how the product operates:
 
@@ -62,7 +63,7 @@ There are 3 scenario for completion of trade.
 After a trade is completed or cancelled, the seller can re-sell the item by creating a new trade.
 
 # Technical Documentation
-The technical documentation for **Physical Token** is in [here](v1/README.md).
+The technical documentation for **Physical Token** is in [here](contracts/v1/README.md).
 
 # Disclaimer
 As of 2024, This repository is not in active maintenance. The contributor do not guarantee the functionality and the stability for the solution.
