@@ -3,7 +3,7 @@
 ## Overview
 The `PhysicalToken` smart contract is an implementation of the ERC1155 multi-token standard with additional functionalities for managing tradable items, specifically for facilitating trades between users. The below diagram illustrates the smart contract architecture:
 
-![Smart Contract Architecture](img/Smart Contract Architecture.png)
+![Smart Contract Architecture](https://github.com/EvanLee2048/PhysicalToken/blob/master/img/Smart%20Contract%20Architecture.png?raw=true)
 
 ## Contract `PhysicalToken`
 
