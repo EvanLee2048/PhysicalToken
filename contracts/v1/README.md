@@ -1,7 +1,8 @@
 # Technical Documentation
 
 ## Overview
-The `PhysicalToken` smart contract is an implementation of the ERC1155 multi-token standard with additional functionalities for managing tradable items, specifically for facilitating trades between users. The below diagram illustrates the smart contract architecture:
+
+The `PhysicalToken` smart contract is an implementation of the ERC1155 multi-token standard with additional functionalities for managing tradable items, specifically for facilitating trades between users. The diagram below illustrates the smart contract architecture:
 
 ![Smart Contract Architecture](https://github.com/EvanLee2048/PhysicalToken/blob/master/img/Smart%20Contract%20Architecture.png?raw=true)
 
@@ -48,16 +49,16 @@ This contract extends `ERC1155` and `Ownable` to manage the trading of physical 
 
 ## Public Functions
 
-| Function | Caller | Description |
-|----------|----------|----------|
-|**mintTradableItem** | Contract Owner|Mints new tradable items and assigns them to specified addresses. This function is only callable by contract owner. It is public just because to allow the owner to deploy the contract first and mint at later time. |
-|**getTradableItem**| Everyone | Retrieves details of a tradable item based on its image ID|
-|**safeTransferFrom**| Seller | Overrides the ERC1155 transfer function to include trade validation|
-|**fromCreateTrade**| Seller |Initiates a trade from the seller to a buyer, including price and if the seller accept returning the product in trading procuess|
-|**cancelTrade**| Buyer or Seller | Buyer or seller cancel an imcomplete trade |
-|**toAcceptTrade**| Buyer | Accepts a trade by the buyer, ensuring the deposits match the trade price|
-|**toCompleteTrade**| Seller |Completes a trade, transferring the item and handling deposits|
-|**returnTrade**| Buyer | Manages the return process for a trade, including refunding deposits|
+| Function              | Caller         | Description                                                                 |
+|-----------------------|----------------|-----------------------------------------------------------------------------|
+| **mintTradableItem**  | Contract Owner | Mints new tradable items and assigns them to specified addresses. This function is only callable by the contract owner. It is public to allow the owner to deploy the contract first and mint at a later time. |
+| **getTradableItem**   | Everyone       | Retrieves details of a tradable item based on its image ID.                 |
+| **safeTransferFrom**  | Seller         | Overrides the ERC1155 transfer function to include trade validation.        |
+| **fromCreateTrade**   | Seller         | Initiates a trade from the seller to a buyer, including price and if the seller accepts returning the product in the trading process. |
+| **cancelTrade**       | Buyer or Seller| Allows the buyer or seller to cancel an incomplete trade.                   |
+| **toAcceptTrade**     | Buyer          | Accepts a trade by the buyer, ensuring the deposits match the trade price.  |
+| **toCompleteTrade**   | Seller         | Completes a trade, transferring the item and handling deposits.             |
+| **returnTrade**       | Buyer          | Manages the return process for a trade, including refunding deposits.       |
 
 ## Modifiers
 
@@ -82,38 +83,43 @@ Custom error messages are provided for various conditions, ensuring clear commun
 
 This contract provides a robust framework for managing tradable items on the Ethereum blockchain, leveraging the ERC1155 standard while adding custom logic for trade facilitation and deposit management.
 
-
 ## Contract Upgradeability
 
-Smart contracts deployed to blockchain are immutable by nature. However, contract upgrade is possible by implementing transparent proxy pattern. The **Physical Token** project leverages the open-source implementation by [Open Zeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master).
+Smart contracts deployed to the blockchain are immutable by nature. However, contract upgrades are possible by implementing the transparent proxy pattern. The **Physical Token** project leverages the open-source implementation by [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master).
 
-The behavior for the use of contract are:
+The behavior for the use of the contract is:
 
-| Behavior | Description |
-|----------|----------|	
-| Proxy admin triggers the functions | The Proxy admin can access the administrative functions directly but never fall back to the implementation contract. |
-| Everyone who is not proxy admin | Any function calls will be directed to the underlying implementation contract, regardless of whether those calls correspond to the administrative functions exposed by the proxy itself. |
+| Behavior                          | Description                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------------|
+| Proxy admin triggers the functions | The Proxy admin can access the administrative functions directly but never fallback to the implementation contract. |
+| Everyone who is not proxy admin    | Any function calls will be directed to the underlying implementation contract, regardless of whether those calls correspond to the administrative functions exposed by the proxy itself. |
 
 ## Contract Security
-The **Physcial Token** contract owner has the administrative permission to perform critical action (e.g. mint token & contract upgrade "by proxy admin"). The security measure for the administrative persmissions are crucial to the development of eco-system. The **Physcial Token** project protects the critical actions by implementing multi-signature smart contract pattern. The **Physcial Token** use Safe.Global (a.k.a Gnosis Safe) [multi-signature solution](https://github.com/safe-global/safe-deployments) to protect the **Physcial Token**.
 
-The **Physcial Token** contract administrative action only executed with 3 of 2 approval signature is obtained. The 3 signature keys are managed in different key management system, which can be self-managed HSM or manged by custodian.
+The **Physical Token** contract owner has the administrative permission to perform critical actions (e.g., mint token & contract upgrade "by proxy admin"). The security measures for the administrative permissions are crucial to the development of the ecosystem. The **Physical Token** project protects the critical actions by implementing a multi-signature smart contract pattern. The **Physical Token** uses Safe.Global (a.k.a Gnosis Safe) [multi-signature solution](https://github.com/safe-global/safe-deployments) to protect the **Physical Token**.
 
-## Future Enhancement
+The **Physical Token** contract administrative actions are only executed with 3 of 2 approval signatures obtained. The 3 signature keys are managed in different key management systems, which can be self-managed HSM or managed by a custodian.
+
+## Future Enhancements
 
 ### Tokenomics
-The **physical token** wasn't consider tokenomics model such as DAO. Potentially, the physical token solution is possible to issue DAO token as incentive and establish community goverance.
 
-### Use of Stablecoin 
-The **physical token** smart contract only support native cryptocurrency (e.g. Polygon Matic) as payment & collateralization for the trade. To mitigate market risk of rigorous fluctuation of native cryptocurrency. The smart contract should accept stablecoin like USDC or PUSD.
+The **Physical Token** project did not consider a tokenomics model such as DAO. Potentially, the Physical Token solution could issue DAO tokens as incentives and establish community governance.
+
+### Use of Stablecoin
+
+The **Physical Token** smart contract only supports native cryptocurrency (e.g., Polygon Matic) as payment & collateralization for the trade. To mitigate the market risk of rigorous fluctuation of native cryptocurrency, the smart contract should accept stablecoins like USDC or PUSD.
 
 ### Gas Abstraction
-The **physical token** project target user are gamers or flipper. They are not necessarily familiar with blockchain. The project should provider gas abstraction feature so that the user can pay gas fee using stablecoin.
 
-### Cross Chain Transfer
-The **physical token** was only designed for Polygon Matic at the moment. However, the team should study the technical feasibility for the support of cross chain transfer.
+The **Physical Token** project targets users such as gamers or flippers, who may not be familiar with blockchain. The project should provide a gas abstraction feature so that the user can pay gas fees using stablecoins.
+
+### Cross-Chain Transfer
+
+The **Physical Token** was only designed for Polygon Matic at the moment. However, the team should study the technical feasibility of supporting cross-chain transfers.
 
 ### Security by MPC Wallet
-Comparing to multi-sig smart contract approach, the MPC wallet solution itself doesn't consist of smart contract. The MPC wallet solution implies:
-1. For future evm compatible blockchain deployment, less smart contract is required to deploy. The **Physical Token** architecture can be simplified. The  operation cost can be reduced (both for contract deployment and function execute gas fee).
-2. MPC Wallet solution can be directly adopted by non-evm compitable contract deployment.
+
+Comparing to the multi-sig smart contract approach, the MPC wallet solution itself doesn't consist of a smart contract. The MPC wallet solution implies:
+1. For future EVM-compatible blockchain deployment, less smart contract deployment is required. The **Physical Token** architecture can be simplified, reducing operational costs (both for contract deployment and function execution gas fees).
+2. The MPC Wallet solution can be directly adopted by non-EVM-compatible contract deployments.
